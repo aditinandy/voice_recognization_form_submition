@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div class="form-area-outer">
+    <div class="from-area-inner">
+        <h2>get in touch with us!</h2>
+        <form id="myform">
+            <input type="text" id="uname" placeholder="user_name" required>
+            <input type="email" id="emailadd" placeholder="email" required>
+            <input type="tel" id="telnum" placeholder="mobile" required>
+            <textarea id="mymessage" placeholder="message" required></textarea>
+            <button type="submit">submit</button>
+        </form>
+    </div>
+</div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+<script>
+if (annyang) {
+  // Let's define our first command. First the text we expect, and then the function it should call
+  var commands = {
+    'show tps report': function() {
+      $('#tpsreport').animate({bottom: '-100px'});
+    },
+    
+'write name *tag': function (variable){
+    let uname = document.getElementById("uname");
+    uname.value = variable;
+  },
+  'write email *tag': function (variable){
+    let emailadd = document.getElementById("emailadd");
+    emailadd.value = variable.split(" ").join("");
+  },
+  'write phone *tag': function (variable){
+    let telnum = document.getElementById("telnum");
+    telnum.value = variable;
+  },
+  'write message *tag': function (variable){
+    let mymessage = document.getElementById("mymessage");
+    mymessage.value = variable;
+  },
+  'submit form': function() {
+      let myform = document.getElementById("myform");
+      let formareainner = document.querySelector(".from-area-inner");
+      let heading = document.querySelector('.from-area-inner h2');
+      myform.remove();
+      heading.innerHTML = "form submition successfully";
+      let html = '';
+      html += '<p>we will call you shortly</p>';
+      formareainner.innerHTML = html;
+  }
+};
+
+  // Add our commands to annyang
+  annyang.addCommands(commands);
+
+  // Start listening. You can call this here, or attach this call to an event, button, etc.
+  annyang.start();
+}
+</script>
+</body>
+</html>
